@@ -1,5 +1,5 @@
 import { Router, Routes } from 'react-router-dom'
-import PrivateRoutes from './utils/privateRoutes'
+import PrivateRoutes from './components/PrivateRoutes'
 
 const App = () => {
 

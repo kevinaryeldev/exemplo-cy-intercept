@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react'
-import CustomToastContainer from './utils/customToastContainer.jsx'
+import CustomToastContainer from './components/CustomToastContainer.jsx'
 
 const router = createBrowserRouter([
   {
