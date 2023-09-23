@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ChakraProvider } from '@chakra-ui/react'
-import { ToastContainer } from 'react-toastify'
+import CustomToastContainer from './utils/customToastContainer.jsx'
 
 const router = createBrowserRouter([
   {
@@ -18,6 +18,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ChakraProvider>
       <RouterProvider router={router}/>
     </ChakraProvider>
-    <ToastContainer/>
+    <CustomToastContainer/>
   </React.StrictMode>
 )
