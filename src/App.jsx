@@ -3,6 +3,7 @@ import PrivateRoutes from './components/PrivateRoutes'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import { AuthProvider } from './context/AuthContext'
+import './App.css'
 
 const App = () => {
   return (
@@ -10,7 +11,7 @@ const App = () => {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Login />} />     
-          <Route element={<PrivateRoutes />}>     
+          <Route element={<PrivateRoutes />}>
             <Route path='/home' element={<Home />} />
           </Route>
         </Routes>
