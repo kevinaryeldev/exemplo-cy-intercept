@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const getUserData = async () => {
-        if (!!token){
+        if (token){
             try {
                 const { data } = await api.get("/user");
                 setUser(data);
