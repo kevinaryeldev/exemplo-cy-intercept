@@ -1,11 +1,21 @@
 import { createContext, useState } from "react";
-import { toast } from "react-toastify";
 import api from "../utils/api.js";
 import { useNavigate } from "react-router";
+import { useToast } from "@chakra-ui/react";
 
 
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
+
+    const toast = useToast(
+        {
+            defaultOptions:{
+                position:"bottom-right",
+                duration: 5000,
+                isClosable: true
+            }
+        }
+    )
 
     const token = localStorage.getItem("userToken")
 
@@ -18,7 +28,19 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("userToken", JSON.stringify(data));
             navigate("/home");
         } catch (error) {
-            toast.error(error.response.data.message);
+            if(error.response){
+                toast({
+                    title: error.code,
+                    status: 'error',
+                    description:error.response.data.message
+                });
+            }else{
+                toast({
+                    title: error.code,
+                    status: 'error'
+                });
+            }
+            
         }
     };
 
@@ -31,10 +53,25 @@ export const AuthProvider = ({ children }) => {
     const getUserData = async () => {
         if (token){
             try {
-                const { data } = await api.get("/user");
-                setUser(data);
+                const { data } = await api.get("/user",{headers:{
+                    Authorization:token
+                }});
+                if(data){
+                    setUser(data);
+                }
             } catch (error) {
-                toast.error(error.response.data.message);
+                if(error.response){
+                    toast({
+                        title: error.code,
+                        status: 'error',
+                        description:error.response.data.message
+                    });
+                }else{
+                    toast({
+                        title: error.code,
+                        status: 'error'
+                    });
+                }
                 logout();
             }
         }
