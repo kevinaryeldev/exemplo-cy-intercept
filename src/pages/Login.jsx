@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import './Login.css'
 
-export default function Home() {
+const Login = () => {
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }} minW={'100vw'}>
       <Flex p={8} flex={1} align={'center'} justify={'center'} id='login-camp'>
@@ -42,3 +42,4 @@ export default function Home() {
     </Stack>
   )
 }
+export default Login
