@@ -1,27 +1,41 @@
 import { useContext, useLayoutEffect } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import { Box,Spinner } from "@chakra-ui/react";
 
 const PrivateRoutes = () => {
 
     const {getUserData,token,user} = useContext(AuthContext)
-    let auth = true
 
-    useLayoutEffect(async ()=>{
+    let auth = false
+
+
+    useLayoutEffect(() =>{
         if (user){
-            return
-        } else{
+            auth = true
+        } else {
             if(token){
-                await getUserData();
-                user? auth=true :auth = false
-            }else{
+                getUserData();
+            } else {
                 auth = false
             }
         }
-    });
+    },[user,token]);
 
     return( 
-        auth ? <Outlet/> : <Navigate to={"/"}/>
+        token && auth ? <Outlet/> :
+         token ? 
+            <Box minH={"100vh"} maxWidth={"full"} display={"flex"} alignItems={"center"} justifyContent={"center"}>
+                <Spinner
+                    thickness='4px'
+                    speed='0.65s'
+                    emptyColor='gray.200'
+                    color='blue.500'
+                    width={"10vw"}
+                    height={"10vw"}
+                />
+            </Box> :
+        <Navigate to={"/"}/>
     )
 }
 
